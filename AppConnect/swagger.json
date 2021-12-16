@@ -1,0 +1,93 @@
+{
+  "swagger" : "2.0",
+  "host" : "localhost",
+  "basePath" : "/AutomatedDocumentProcessingSample/v1",
+  "schemes" : [ "http" ],
+  "info" : {
+    "title" : "Automated Document Processing Sample",
+    "description" : "This is the Automated Document Processing Sample Swagger document",
+    "version" : "1.0.0"
+  },
+  "definitions" : {
+    "WebhookData" : {
+      "properties" : {
+        "eventDateTime" : {
+          "type" : "string"
+        },
+        "receiverRegistrationId" : {
+          "type" : "string"
+        },
+        "objectStoreId" : {
+          "type" : "string"
+        },
+        "sourceObjectId" : {
+          "type" : "string"
+        },
+        "eventType" : {
+          "type" : "string"
+        },
+        "subscriptionId" : {
+          "type" : "string"
+        },
+        "initiatingUser" : {
+          "type" : "string"
+        },
+        "properties" : {
+          "type" : "object",
+          "properties" : {
+            "Id" : {
+              "type" : "object",
+              "properties" : {
+                "value" : {
+                  "type" : "string"
+                }
+              },
+              "required" : [ "value" ]
+            }
+          },
+          "required" : [ "Id" ]
+        }
+      },
+      "required" : [ "eventDateTime", "receiverRegistrationId", "objectStoreId", "sourceObjectId", "eventType", "subscriptionId", "initiatingUser" ]
+    }
+  },
+  "tags" : [ {
+    "name" : "data",
+    "description" : "Operation data"
+  } ],
+  "paths" : {
+    "/finalization" : {
+      "post" : {
+        "operationId" : "finalization",
+        "summary" : "",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "Document finalization",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/WebhookData"
+          }
+        }, {
+          "name" : "md5",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "hmac",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        },
+        "tags" : [ "customers" ]
+      }
+    }
+  }
+}
